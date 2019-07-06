@@ -23,12 +23,7 @@ include 'includes/navbar.php';
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" placeholder="Enter Your Email" value="<?= $user->email ?>" />
-                    <small class="input-hint">Enter your personal email.</small>
                 </div>
-                <!-- <div class="form-group">
-                    <label for="number">Phone Number</label>
-                    <input type="number" name="number" id="number" placeholder="Enter Your Mobile Number" required />
-                </div> -->
                 <div class="form-group">
                     <label for="gender">Gender</label>
                     <select name="gender" id="gender">

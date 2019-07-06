@@ -15,7 +15,9 @@ $this->load->view('includes/navbar');
                     <label for="password">New Password</label>
                     <input type="password" name="password" id="password" placeholder="Enter Password" required autofocus>
                     <div class="password-toggle">
-                        <input type="checkbox" name="show-password" id="show-password"><label for="show-password">Show Password</label>
+                        <label for="show-password">
+                            <input type="checkbox" name="show-password" id="show-password">Show Password
+                        </label>
                     </div>
                 </div>
                 <div class="form-group">

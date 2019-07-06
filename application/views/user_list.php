@@ -22,13 +22,11 @@ $this->load->view('includes/navbar');
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Gender</th>
-                <th>Last Updated
-                </th>
+                <th>Last Updated</th>
                 <th>Edit</th>
                 <th>Delete</th>
             <tr>
-
-                <?php foreach ($users as $user) : ?>
+            <?php foreach ($users as $user) : ?>
                 <tr>
                     <td><?= $user->id ?></td>
                     <td><?= $user->first_name ?></td>
@@ -40,7 +38,7 @@ $this->load->view('includes/navbar');
                         <a href="user/edit/<?= $user->id ?>" title="Edit">Edit </a>
                     </td>
                     <td>
-                        <a onclick="return confirm('Are you Sure You want to Delete This Entry?')" href="user/delete/<?= $user->id ?>" title="Delete"> Delete</i>
+                        <a onclick="return confirm('Are you Sure You want to Delete This Entry?')" href="user/delete/<?= $user->id ?>" title="Delete"> Delete</a>
                     </td>
                 </tr>
             <?php endforeach ?>

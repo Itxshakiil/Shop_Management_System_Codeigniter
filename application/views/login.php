@@ -10,7 +10,8 @@ $this->load->view('includes/navbar');
         <div class="form-wrapper">
             <h3 class="lead text-primary">Login</h3>
             <?php $this->load->view('includes/message'); ?>
-            <form action="<?=base_url("signin")?>" method="post">
+            <?= validation_errors() ?>
+            <form action="<?= base_url("login") ?>" method="post">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" placeholder="Enter Your Email" required />
@@ -20,7 +21,9 @@ $this->load->view('includes/navbar');
                     <input type="password" name="password" id="password" placeholder="Enter Password" required />
                     <small class="input-hint">Password is case-sensitive.</small>
                     <div class="password-toggle">
-                        <input type="checkbox" name="show-password" id="show-password"><label for="show-password">Show Password</label>
+                        <label for="show-password">
+                            <input type="checkbox" name="show-password" id="show-password">Show Password
+                        </label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,4 +38,3 @@ $this->load->view('includes/navbar');
 <?php
 $this->load->view('includes/footer');
 ?>
-<script src="<?php echo base_url(); ?>assets/js/form.js"></script>

@@ -9,11 +9,13 @@ $this->load->view('includes/navbar');
     <div class="container">
         <div class="form-wrapper">
             <h3 class="lead">Sign Up</h3>
-            <form action="<?php echo base_url() . 'signup'; ?>" method="post">
+            <form action="<?php echo base_url() . 'register'; ?>" method="post">
+              <?php  $this->load->view('includes/message');?>   
+                <?= validation_errors() ?>
                 <div class="row">
                     <div class="form-group col">
                         <label for="first-name">First Name</label>
-                        <input type="text" name="first-name" id="first-name" placeholder="Enter Your First Name" autofocus required>
+                        <input type="text" name="first-name" id="first-name" placeholder="Enter Your First Name" required autofocus>
                     </div>
                     <div class="form-group col">
                         <label for="last-name">Last Name</label>
@@ -39,7 +41,7 @@ $this->load->view('includes/navbar');
                 </div>
                 <div class="form-group">
                     <label for="gender">Gender</label>
-                    <select name="gender" id="gender">
+                    <select name="gender" id="gender" required>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="others">Others</option>
@@ -47,7 +49,7 @@ $this->load->view('includes/navbar');
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="SignUp">
                     </div>
-                    <p>Already Have an Account? <a href="<?php echo  base_url() . 'login'; ?>" class="text-primary">Login</a></p>
+                    <p>Already Have an Account? <a href="<?php echo  base_url( "login"); ?>" class="text-primary">Login</a></p>
             </form>
         </div>
     </div>

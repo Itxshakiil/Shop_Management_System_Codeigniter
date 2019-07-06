@@ -12,13 +12,4 @@ class Customer_model extends CI_Model
             'email' => $data['email'],
         ]);
     }
-
-    public function getCustomers()
-    {
-        $this->db->query('SELECT * FROM customers ORDER BY created_at DESC');
-
-        $results = $this->db->resultset();
-
-        return $results;
-    }
 }

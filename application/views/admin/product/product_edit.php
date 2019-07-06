@@ -24,10 +24,6 @@ $this->load->view('includes/navbar');
                     <label for="description">Description <span style="color:red;margin-left:.2em;">*</span></label>
                     <textarea name="description" id="description" placeholder="Test Description" required> <?=$product->description?></textarea>
                 </div>
-                <!-- <div class="form-group">
-                    <label for="number">Phone Number</label>
-                    <input type="number" name="number" id="number" placeholder="Enter Your Mobile Number" required />
-                </div> -->
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Update">
                 </div>

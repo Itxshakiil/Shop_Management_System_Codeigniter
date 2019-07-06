@@ -16,7 +16,7 @@ $this->load->view('includes/navbar');
                     <input type="email" name="email" id="email" placeholder="Enter Your Email" required />
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary  " value="Send Reset Link">
+                    <input type="submit" class="btn btn-primary" value="Send Reset Link">
                 </div>
             </form>
         </div>
@@ -26,4 +26,3 @@ $this->load->view('includes/navbar');
 <?php
 $this->load->view('includes/footer');
 ?>
-<script src="<?php echo base_url(); ?>assets/js/form.js"></script>

@@ -7,7 +7,6 @@ $this->load->view('includes/navbar');
 ?>
 <main>
     <div class="container">
-        Welcome, <?= $_SESSION['first-name'] ?? 'User'  ?>
         <div class="action-btns">
             <a href="user" class="btn btn-primary">User Management</a>
             <a href="product" class="btn btn-primary">Product Management</a>
@@ -32,21 +31,19 @@ $this->load->view('includes/navbar');
             <tr>
                 <?php foreach ($products as $product) : ?>
                 <tr>
-                    <?php foreach ($product as $detail) : ?>
-                        <? if ($detail == 'description') : ?>
-                            <?php
-                            $detail = str_replace('&nbsp;', ' ', $detail);
-                            $detail = substr($detail, 0, 100); ?>
-                        <? endif ?>
-                        <td><?= strip_tags($detail) ?></td>
-                    <?php endforeach ?>
+                    <td><?= $product->id ?></td>
+                    <td><?= $product->name ?></td>
+                    <td><?= $product->price ?></td>
+                    <td><?=strip_tags(substr(str_replace('&nbsp;', ' ', $product->description), 0, 100))?></td>
+                    <td><?= $product->img ?></td>
+                    <td><?= $product->created_at ?></td>
                     <td>
-                        <a href="<?= base_url() ?>product/view/<?= $product['id'] ?>" title="View"> <i class="fa fa-eye fas"></i> </a></td>
+                        <a href="<?= base_url() ?>product/view/<?= $product->id ?>" title="View"> <i class="fa fa-eye fas"></i> </a></td>
                     <td>
-                        <a href="product/edit/<?= $product['id'] ?>" title="Edit"> <i class="fa far fa-edit "></i></a></td>
+                        <a href="product/edit/<?= $product->id ?>" title="Edit"> <i class="fa far fa-edit "></i></a></td>
                     <td>
 
-                        <a onclick="return confirm('Are you Sure You want to Delete This Entry?')" href="product/delete/<?= $product['id'] ?>" title="Delete">  <i class="fa fas fa-trash"></i></i>
+                        <a onclick="return confirm('Are you Sure You want to Delete This Entry?')" href="product/delete/<?= $product->id ?>" title="Delete"> <i class="fa fas fa-trash"></i></i>
                     </td>
                 <tr>
                 <?php endforeach ?>

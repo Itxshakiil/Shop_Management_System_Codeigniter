@@ -7,7 +7,6 @@ $this->load->view('includes/navbar');
 ?>
 <main>
     <div class="container">
-
         <?php $this->load->view('includes/message'); ?>
         <div class="action-btns">
             <a href="<?= base_url() ?>admin/user" class="btn btn-primary">User Management</a>

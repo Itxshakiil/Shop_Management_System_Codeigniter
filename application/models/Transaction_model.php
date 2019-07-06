@@ -1,7 +1,6 @@
 <?php
 class Transaction_model extends CI_Model
 {
-
     public function addTransaction($data)
     {
         $this->load->database();
@@ -20,6 +19,12 @@ class Transaction_model extends CI_Model
     {
         $this->load->database();
         $query = $this->db->get('transactions', 10);
+        return $query->result();
+    }
+    public function get_transactions()
+    {
+        $this->load->database();
+        $query = $this->db->get('transactions');
         return $query->result();
     }
 }

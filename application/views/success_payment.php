@@ -21,7 +21,6 @@ $this->load->view('includes/navbar');
 <script src="https://js.stripe.com/v3/"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/form.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/stripe.js"></script>
 <?php
 $this->load->view('includes/footer');
 ?>

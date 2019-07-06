@@ -3,26 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
-
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     *	- or -
-     * 		http://example.com/index.php/welcome/index
-     *	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
-     */
     public function index()
     {
         if ($this->config->item('is_admin_configured') === FALSE) {
-            header('Location:'.base_url("admin/config"));
+            header('Location:' . base_url("admin/config"));
         }
         if (!is_logged_admin()) {
             $this->session->set_flashdata('redirect', uri_string());
@@ -42,7 +26,7 @@ class Admin extends CI_Controller
             $this->load->view('config_admin');
         } else {
             $this->session->set_flashdata('error', 'Already Configured');
-            header('Location:'.base_url("admin"));
+            header('Location:' . base_url("admin"));
         }
     }
     public function configure()
@@ -70,7 +54,7 @@ class Admin extends CI_Controller
         } else {
             echo ' File not found';
         }
-        header('Location:'.base_url("admin/login"));
+        header('Location:' . base_url("admin/login"));
     }
 
     public function user(string $action = 'index', int $id = NULL)
@@ -141,7 +125,48 @@ class Admin extends CI_Controller
         if (is_logged_admin()) {
             header('Location:' . base_url("admin"));
         }
-        $this->load->view('admin/login', ['title' => 'Admin Login']);
+        $this->form_validation->set_rules('email', 'Email', 'required|callback_check_email');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('admin/login', ['title' => 'Admin Login']);
+        } else {
+            $this->load->model('admin_model');
+            if ($admin = $this->admin_model->get_admin_by_email($this->input->post('email'))) {
+                if (password_verify($this->input->post('password'), $admin->password)) {
+                    $newdata = array(
+                        'first-name'  => $admin->first_name,
+                        'last-name'     => $admin->last_name,
+                        'logged_in' => TRUE,
+                        'user_type' => 'admin',
+                        'user_id' => $admin->id
+                    );
+                    $this->session->set_userdata($newdata);
+
+                    $url = $_SESSION["redirect"] ?? "admin";
+                    // FOR php version earlier than PHP7
+                    // $url = isset($_SESSION["redirect"]) ? $_SESSION["redirect"] : "admin";
+                    $_SESSION["redirect"] = "";
+                    header('Location:' . base_url($url));
+                } else {
+                    $this->session->set_flashdata('error', "Password don't match");
+                    $this->load->view('admin/login');
+                }
+            } else {
+                $this->session->set_flashdata('error', "Email is not registered with any account. Please Register");
+                $this->load->view('admin/login');
+            }
+        }
+    }
+    public function check_email($email)
+    {
+        $this->load->model('admin_model');
+
+        if ($this->admin_model->isEmailRegistered($email)) {
+            return true;
+        } else {
+            $this->form_validation->set_message('check_email', 'No account is registered with entered email');
+            return false;
+        }
     }
     public function signup()
     {
@@ -159,34 +184,6 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('success', 'Admin Account Created Successfully');
         header('Location:' . base_url() . 'admin/login');
     }
-    public function signin()
-    {
-        $this->load->model('admin_model');
-        if ($admin = $this->admin_model->get_admin_by_email($this->input->post('email'))) {
-            if (password_verify($this->input->post('password'), $admin->password)) {
-                $newdata = array(
-                    'first-name'  => $admin->first_name,
-                    'last-name'     => $admin->last_name,
-                    'logged_in' => TRUE,
-                    'user_type' => 'admin',
-                    'user_id' => $admin->id
-                );
-                $this->session->set_userdata($newdata);
-
-                $url = $_SESSION["redirect"] ?? "admin";
-                // FOR php version earlier than PHP7
-                // $url = isset($_SESSION["redirect"]) ? $_SESSION["redirect"] : "admin";
-                $_SESSION["redirect"] = "";
-                header('Location:' . base_url($url));
-            } else {
-                $this->session->set_flashdata('error', "Password don't match");
-                $this->load->view('admin/login');
-            }
-        } else {
-            $this->session->set_flashdata('error', "Email is not registered with any account. Please Register");
-            $this->load->view('admin/login');
-        }
-    }
     #TODO : have to look through full function
     public function product(string $action = 'index', int $id = NULL)
     {
@@ -196,19 +193,7 @@ class Admin extends CI_Controller
         }
         $this->load->model('product_model');
         if ($action === 'index') {
-            $products = array();
-            $result = $this->product_model->get_last_ten_entries();
-            foreach ($result as $product) {
-                #TODO : Update like User
-                $products[$product->id] = array(
-                    'id' => $product->id,
-                    'name' => $product->name,
-                    'price' => $product->price,
-                    'description' => $product->description,
-                    'img' => $product->img,
-                    'created_at' => $product->created_at,
-                );
-            }
+            $products = $this->product_model->get_last_ten_entries();
             $data = array(
                 'title' => "product_list",
                 'products' => $products
@@ -226,28 +211,23 @@ class Admin extends CI_Controller
             $target_file = $target_dir . basename($_FILES["image"]["name"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-            // Check if image file is a actual image or fake image
             if (isset($_POST["submit"])) {
                 $check = getimagesize($_FILES["image"]["tmp_name"]);
                 if ($check !== false) {
-                    echo "File is an image - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
                     echo "File is not an image.";
                     $uploadOk = 0;
                 }
             }
-            // Check if file already exists
             if (file_exists($target_file)) {
                 echo "Sorry, file already exists.";
                 $uploadOk = 0;
             }
-            // Check file size
             if ($_FILES["image"]["size"] > 500000) {
                 echo "Sorry, your file is too large.";
                 $uploadOk = 0;
             }
-            // Allow certain file formats
             if (
                 $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif"
@@ -255,10 +235,8 @@ class Admin extends CI_Controller
                 echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
                 $uploadOk = 0;
             }
-            // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
                 echo "Sorry, your file was not uploaded.";
-                // if everything is ok, try to upload file
             } else {
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
 
@@ -334,12 +312,9 @@ class Admin extends CI_Controller
             $this->load->helper('mail_helper');
             /* */
             if (send_mail($html)) {
-                // Add To database
                 $this->passwordreset_model->save_reset_link($admin->id, $admin->email, $reset_link);
-
                 $this->session->set_flashdata('success', 'Reset Link sent to Email Click on the link and change Password');
             } else {
-
                 $this->session->set_flashdata('error', 'Error during sending reset link . Please Try again ');
             }
             header('Location:' . base_url("admin/forgot_password"));
