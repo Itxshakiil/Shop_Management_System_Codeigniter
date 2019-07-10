@@ -19,12 +19,8 @@ $this->load->view('includes/navbar');
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="Enter Password" required />
+                    <i class="fa fas fa-eye password-toggler" title="Show Password"></i>
                     <small class="input-hint">Password is case-sensitive.</small>
-                    <div class="password-toggle">
-                        <label for="show-password">
-                            <input type="checkbox" name="show-password" id="show-password">Show Password
-                        </label>
-                    </div>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Login">

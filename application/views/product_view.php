@@ -15,7 +15,7 @@ include 'includes/navbar.php';
                 </div>
                 <div class="product-detail">
                     <p><strong>Product :</strong> <?= $product->name ?></p>
-                    <p><strong>Price :</strong> $ <?= $product->price ?></p>
+                    <p><strong>Price :</strong> ₹ <?= $product->price ?></p>
 
                     <div class="center">
                         <div><?= @$product->description ?></div>
@@ -23,7 +23,7 @@ include 'includes/navbar.php';
                 </div>
                 <div class="action-btn">
                     <a href="<?= base_url("product/buy/" . $product->id) ?>" class="btn btn-primary">Buy Now</a>
-                    <button class="btn btn-success">Add to Cart</button>
+                    <button class="btn btn-success" disabled="disabled">Add to Cart</button>
                 </div>
             </div>
         </div>

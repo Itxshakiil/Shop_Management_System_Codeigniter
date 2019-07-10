@@ -1,6 +1,6 @@
 <?php
 
-function send_mail($message){
+function send_mail($reciever_address,$name='',$subject,$message){
     require './vendor/autoload.php';
     $mail = new \PHPMailer\PHPMailer\PHPMailer;
     $mail->isSMTP();
@@ -9,11 +9,11 @@ function send_mail($message){
     $mail->Port = 587;
     $mail->SMTPSecure = 'tls';
     $mail->SMTPAuth = true;
-    $mail->Username = "username@gmail.com";
-    $mail->Password = "Password";
+    $mail->Username = "itxshakilalam@gmail.com";
+    $mail->Password = "Shakil@317";
     $mail->setFrom('admin@acme.com', 'Acme Computers');
-    $mail->addAddress('itxshakiil@gmail.com', 'Shakil Alam');
-    $mail->Subject = 'Reset Password';
+    $mail->addAddress($reciever_address,$name);
+    $mail->Subject = $subject;
     $mail->isHTML(true);
     $mail->Body = $message;
     if (!$mail->send()) {

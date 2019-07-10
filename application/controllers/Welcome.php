@@ -15,10 +15,10 @@ class Welcome extends CI_Controller
 	}
 	public function register()
 	{
-		$this->form_validation->set_rules('first-name', 'First Name', 'required');
+		$this->form_validation->set_rules('first-name', 'First Name', 'required|alpha');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('number', 'Mobile Number', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('number', 'Mobile Number', 'required|greater_than[8]');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('register', ['title' => 'Register']);
 		} else {
@@ -36,7 +36,7 @@ class Welcome extends CI_Controller
 	}
 	public function login()
 	{
-		$this->form_validation->set_rules('email', 'Email', 'required|callback_email_check');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_check');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		if($this->form_validation->run() == FALSE){
 			$this->load->view('Login', ['title' => 'Login']);

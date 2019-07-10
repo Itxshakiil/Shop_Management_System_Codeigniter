@@ -24,15 +24,7 @@ $this->load->view('includes/navbar');
                         <label for="email">Email</label>
                         <input type="email" name="email" class=" mb-3 StripeElement StripeElement--empty" placeholder="Enter Email Address" required />
                     </div>
-                    <div id="card-element" class="form-control">
-                        <!-- a Stripe Element will be inserted here. -->
-                    </div>
-
-                    <!-- Used to display form errors -->
-                    <div id="card-errors" role="alert"></div>
-                </div>
-
-                <button>Submit Payment</button>
+                <button type="submit">Submit Payment</button>
             </form>
         </div>
     </div>

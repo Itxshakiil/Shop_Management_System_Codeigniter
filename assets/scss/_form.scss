@@ -30,6 +30,7 @@ input[type="email"],
 input[type="password"],
 input[type="submit"],
 input[type="date"],
+input[type="tel"],
 select,
 textarea {
 	display: block;
@@ -37,7 +38,7 @@ textarea {
     padding: 0.4rem;
     outline: none;
     font-size: 1.2rem;
-    border-radius: 5px;
+    border-radius: 1px;
 	border: 1px solid #ccc;
 }
 
@@ -59,6 +60,12 @@ input:invalid:focus:not(:placeholder-shown){
      content:attr(data-text);
      color:red;
  }
+ .password-toggler{
+     display: inline-block;
+     position:relative;
+     top:-27px;
+     left:calc(100% - 25px);
+    }
 
 
 

@@ -25,17 +25,24 @@ function addAsterisk(e) {
 	}
 }
 
-// Show/Hide Password
-const password = document.forms[0].querySelector("#password");
-const show_password = document.forms[0].querySelector("#show-password");
-if (show_password) {
-	show_password.addEventListener("change", e => {
-		if (password.getAttribute("type") === "password") {
-			password.setAttribute("type", "text");
-			show_password.nextElementSibling.innerHTML = "Hide Password";
-		} else {
-			password.setAttribute("type", "password");
-			show_password.nextElementSibling.innerHTML = "Show Password";
-		}
-	});
+// Password Show/Hide
+const passwordToggler = document.querySelector(".password-toggler")
+if(passwordToggler){
+const passwordInput = passwordToggler.parentNode.querySelector(
+	"input[type='password']"
+);
+passwordToggler.addEventListener("click", e => {
+	if (passwordInput.getAttribute("type") === "password") {
+		passwordInput.setAttribute("type", "text");
+		passwordToggler.classList.remove("fa-eye");
+		passwordToggler.classList.add("fa-eye-slash");
+		passwordToggler.setAttribute('title','Hide Password');
+	} else {
+		passwordInput.setAttribute("type", "password");
+		passwordToggler.classList.remove("fa-eye-slash");
+		passwordToggler.classList.add("fa-eye");
+		passwordToggler.setAttribute("title", "Show Password");
+	}
+});
+
 }

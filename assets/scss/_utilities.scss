@@ -21,7 +21,6 @@
 .row {
 	display: flex;
 	flex-wrap: wrap;
-
 	.col {
 		flex-grow: 1;
 	}
@@ -70,6 +69,10 @@ a.btn{
 	transition: all 0.3s ease-in;
 	width: fit-content;
 	border-radius: 3px;
+	&:disabled{
+		cursor:not-allowed;
+		@include set-background(rgba(219, 214, 214, 0.212));
+	}
 	&:hover{
 		filter:contrast(140%);
 	}
@@ -93,12 +96,9 @@ a.btn{
 	&-danger {
 		@include set-background($danger-color)
 	}
-
 	&-white {
 		@include set-background($danger-color)
 	}
-
-
 }
 .message {
 	display: inline-block;
@@ -106,7 +106,7 @@ a.btn{
 	margin:0.3rem;
 	border: none;
 	outline: none;
-	cursor: pointer;
+	cursor: none;
 	transition: all 0.3s ease-in;
 	width: 100%;
 	border-radius: 3px;

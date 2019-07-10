@@ -19,15 +19,11 @@ $this->load->view('includes/navbar');
                 <div class="form-group">
                     <label for="password"> Password</label>
                     <input type="password" name="password" id="password" placeholder="Enter Password" required />
-                    <div class="row">
+                    <i class="fa fas fa-eye password-toggler" title="Show Password"></i>
+                    <span class="row">
                         <small class="input-hint col">Password is case-sensitive.</small>
                         <a href="<?= base_url("admin/forgot_password") ?>" class="forgot_password col">Forgot Password?</a>
-                    </div>
-                    <div class="password-toggle">
-                        <label for="show-password">
-                            <input type="checkbox" name="show-password" id="show-password">Show Password
-                        </label>
-                    </div>
+                    </span>
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Login">

@@ -21,7 +21,6 @@ class Product_model extends CI_Model
         }
         # TODO: Check if available to download
         # TODO: Add to trash
-        # TODO: Delete from Products
         $this->load->dbutil();
         $sql = "DELETE FROM product  WHERE id = ?";
         return  $this->db->query($sql, $id);

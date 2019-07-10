@@ -308,10 +308,12 @@ class Admin extends CI_Controller
         $this->load->model('passwordreset_model');
         if ($admin = $this->admin_model->get_admin_by_email($this->input->post('email'))) {
             $reset_link = sha1($admin->email . time());
+            $email = $admin->email;
+            $fullname = $admin->first_name . ' ' . $admin->last_name;
+            $subject = 'Reset Password';
             $html = '<p>Your Reset Link is <a href="' . base_url("admin/reset_password/" . $reset_link) . '">' . base_url("reset_password/" . $reset_link) . '</a></p>';
             $this->load->helper('mail_helper');
-            /* */
-            if (send_mail($html)) {
+            if (send_mail($email, $fullname, $subject, $html)) {
                 $this->passwordreset_model->save_reset_link($admin->id, $admin->email, $reset_link);
                 $this->session->set_flashdata('success', 'Reset Link sent to Email Click on the link and change Password');
             } else {
