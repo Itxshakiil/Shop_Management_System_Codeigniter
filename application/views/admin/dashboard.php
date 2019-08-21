@@ -11,6 +11,8 @@ $this->load->view('includes/navbar');
         <div class="action-btns">
             <a href="<?= base_url() ?>admin/user" class="btn btn-primary">User Management</a>
             <a href="<?= base_url() ?>admin/product" class="btn btn-primary">Product Management</a>
+            <a href="<?= base_url() ?>admin/order" class="btn btn-primary">Order Management</a>
+            <a href="<?= base_url() ?>admin/payment" class="btn btn-primary">Payment Management</a>
         </div>
         <section class="orders">
             <p class="lead btn text-primary">Orders</p>

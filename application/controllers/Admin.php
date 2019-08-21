@@ -57,6 +57,22 @@ class Admin extends CI_Controller
         header('Location:' . base_url("admin/login"));
     }
 
+    public function order(string $action = 'index', int $id = NULL){
+
+        if (!is_logged_admin()) {
+            $_SESSION['redirect'] = uri_string();
+            header('Location:' . base_url("admin/login"));
+        }
+        $this->load->model('order_model');
+        if ($action === 'index') {
+            $orders = $this->order_model->get_orders();
+            $data = array(
+                'title' => "User_list",
+                'orders' => $orders
+            );
+            $this->load->view('admin/order/index', $data);
+        }
+    }
     public function user(string $action = 'index', int $id = NULL)
     {
         if (!is_logged_admin()) {

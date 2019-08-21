@@ -10,7 +10,7 @@ $this->load->view('includes/navbar');
         <div class="form-wrapper">
             <h3 class="lead">Sign Up</h3>
             <form action="<?php echo base_url() . 'register'; ?>" method="post">
-              <?php  $this->load->view('includes/message');?>   
+                <?php $this->load->view('includes/message'); ?>
                 <?= validation_errors() ?>
                 <div class="row">
                     <div class="form-group col">
@@ -34,9 +34,8 @@ $this->load->view('includes/navbar');
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="Enter Password" required />
+                    <i class="password-toggler fa fa-eye" title="Show Password"></i>
                     <small class="input-hint">Password is case-sensitive.</small>
-                    <div class="password-toggle">
-                        <input type="checkbox" name="show-password" id="show-password"><label for="show-password" autocomplete="false">Show Password</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -49,7 +48,7 @@ $this->load->view('includes/navbar');
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="SignUp">
                     </div>
-                    <p>Already Have an Account? <a href="<?php echo  base_url( "login"); ?>" class="text-primary">Login</a></p>
+                    <p>Already Have an Account? <a href="<?php echo  base_url("login"); ?>" class="text-primary">Login</a></p>
             </form>
         </div>
     </div>

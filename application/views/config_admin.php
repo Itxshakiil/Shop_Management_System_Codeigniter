@@ -32,10 +32,8 @@ $this->load->view('includes/navbar');
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" placeholder="Enter Password" required />
+                    <span class="password-toggler fa fa-eye" title="Show Password"></span>
                     <small class="input-hint">Password is case-sensitive.</small>
-                    <div class="password-toggle">
-                        <input type="checkbox" name="show-password" id="show-password"><label for="show-password" autocomplete="false">Show Password</label>
-                    </div>
                 </div>
                 <div class="form-group">
                     <label for="Date of Birth">Date of Birth</label>

@@ -526,7 +526,6 @@ $config['proxy_ips'] = '';
  * Custom Configs
  */
 
-$config['is_admin_configured'] = TRUE;
-$config[ 'STRIPE_API_KEY'] = "sk_test_ft7Q5Cquk6Hje6lLbUAaJpOB";
+$config['is_admin_configured']=TRUE;$config[ 'STRIPE_API_KEY'] = "sk_test_ft7Q5Cquk6Hje6lLbUAaJpOB";
 $config[ 'STRIPE_PUBLISHABLE_KEY'] = "pk_test_ilzslIuWx3ixwR2viyLcJTmv";
 

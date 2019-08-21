@@ -5,7 +5,7 @@
             <div class="nav-link">
                 <ul>
                     <li><a href="<?= base_url() ?>" title="Homepage">Home</a></li>
-                    <li><a href="<?= base_url() ?>contact_us">Contact Us</a></li>
+                    <!-- <li><a href="<?= base_url() ?>contact_us">Contact Us</a></li> -->
                     <li><a href="<?= base_url() ?>admin">Admin</a></li>
                     <!-- <li class="cart"><a href="#"><i class="fas fa-shopping-cart"></i></a><span class="badge badge-primary">15</span></li> -->
                 </ul>
