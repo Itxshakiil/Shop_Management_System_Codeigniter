@@ -13,8 +13,6 @@ class Order_model extends CI_model
     }
     public function get_orders()
     {
-
-
         $this->load->dbutil();
         $sql = "SELECT o.*,p.name
                 FROM orders o
